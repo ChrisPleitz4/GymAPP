@@ -15,4 +15,9 @@ class Membership extends Model
         'price',
         'description'
     ];
+    //recuperar todos los clientes de una membresia
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
+    }
 }
