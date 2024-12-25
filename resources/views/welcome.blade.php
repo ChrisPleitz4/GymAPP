@@ -7,6 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
 </head>
+@if ($errors->any())
+            <div>
+                <h2>ERROR/ES:</h2>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>
+                            {{$error}}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif 
 <body class="bg-cover bg-center h-screen">
 
     <!-- Contenedor que centra el contenido -->
@@ -20,8 +32,10 @@
             </div>
 
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Iniciar sesión</h2>
-
-            <form action="#" method="POST">
+            
+            {{-- Formulario --}}
+            <form action="{{ route('formlogin') }}" method="POST">
+                @csrf
                 <div class="mb-4">
                     <label for="email" class="block text-gray-600">Correo electrónico</label>
                     <input type="email" id="email" name="email" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
