@@ -15,8 +15,23 @@ class AuthController extends Controller
      * @return \Illuminate\View\View
      */
     public function showLoginForm()
-    {
-        return view('welcome');
+    {   if (Auth::check()) {
+        $user = Auth::user();
+        $roleId = $user->role->id;
+        switch ($roleId) {
+            case 1:
+                return view('admin.index',['userName' => $user->name]);
+                break;
+            case 2:
+                return view('empleado.index');
+                break;
+            default:
+                return view('welcome');
+                break;
+        }
+        }
+            return view('welcome');
+        
     }
 
     /**
@@ -26,7 +41,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login(Request $request)
-    {
+    {    
         // Validar las credenciales
         $request->validate([
             'email' => 'required|email',
@@ -67,27 +82,46 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        Auth::logout();
+        Auth::logout(); // Cierra sesión del usuario actual
+        session()->invalidate(); // Invalida la sesión activa
+        session()->regenerateToken(); // Regenera el token CSRF para evitar vulnerabilidades
+    
         return redirect()->route('welcome');
     }
 
-    /**
-     * Validar Acceso a Rutas del Admin.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function Admin($ruta)
-    {
-         // Verificar si el usuario está autenticado
-    if (!Auth::check() ) {
-        // Si no está autenticado, redirigir al login con un mensaje
-        return redirect()->route('welcome')->with('error', 'Debes iniciar sesión para acceder a esta página.');
+/**
+ * Validar Acceso a Rutas del Admin.
+ *
+ * @param string $ruta
+ * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+ */
+public function Admin($ruta)
+{
+    // Verificar si el usuario está autenticado y si tiene permisos de administrador
+    if (!Auth::check() || Auth::user()->role->id !== 1) {
+        // Si no está autenticado O no es administrador, redirigir
+        return redirect()->route('welcome')->with('error', 'Debes iniciar sesión como administrador para acceder a esta página.');
     }
-
-    // Si está autenticado, puedes acceder a los datos del usuario
+    // Obtener al usuario autenticado
     $user = Auth::user();
-    
-    // Aquí puedes devolver la vista
-    return view('admin.index',['userName' => $user->name]);
+
+    // Validar la ruta solicitada y devolver la vista correspondiente
+    switch ($ruta) {
+        case 'dashboard':
+            return response()
+                ->view('admin.dashboard', ['userName' => $user->name])
+                ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', '0');
+        case 'settings':
+            return response()
+                ->view('admin.settings', ['userName' => $user->name])
+                ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', '0');
+        default:
+            return redirect()->route('welcome')->with('error', 'Página no encontrada.');
     }
+}
+
 }

@@ -6,6 +6,7 @@
     <title>Administrador Gym Pleitez</title>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 <body class="bg-gray-100">
 
@@ -18,26 +19,19 @@
             <nav class="mt-8">
                 <ul>
                     <li>
-                        <a href="#" class="flex items-center py-3 px-4 hover:bg-orange-500">
+                        <a href="{{route('clientes.index')}}" class="flex items-center py-3 px-4 hover:bg-orange-500">
                             <!-- Cambia el ícono de membresia -->
                             <img src="{{ asset('images/membresia.png') }}" alt="membresia" class="h-12 w-12">
-                            <span class="ml-3">Consultar Membresia</span>
+                            <span class="ml-3">Consultar/Renovar Membresia</span>
                         </a>
                     </li>
-                    <!-- Opción con submenú -->
-                    <li class="relative group">
-                        <button onclick="toggleMenu('menuAtleta')" class="w-full flex items-center py-3 px-4 hover:bg-orange-500 focus:outline-none">
-                            <!-- Aquí puedes cambiar el ícono -->
-                            <img src="{{ asset('images/gestionarAtleta.png') }}" alt="Atleta" class="h-12 w-12">
-                            <span class="ml-3">Gestionar Atletas</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <ul id="menuAtleta" class="hidden bg-orange-500">
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Nuevo Atleta</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Renovar Membresia</a></li>
-                        </ul>
+                    
+                    <li>
+                        <a href="{{route('clientes.create')}}" class="flex items-center py-3 px-4 hover:bg-orange-500">
+                            <!-- Cambia el ícono de membresia -->
+                            <img src="{{ asset('images/gestionarAtleta.png') }}" alt="membresia" class="h-12 w-12">
+                            <span class="ml-3">Nuevo Atleta</span>
+                        </a>
                     </li>
 
                     <!-- Otra opción con submenú -->
@@ -52,8 +46,7 @@
                         </button>
                         <ul id="menuEmpleado" class="hidden bg-orange-500">
                             <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Nuevo Empleado</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Modificar Empleado</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Eliminar Empleado</a></li>
+                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Consultar Empleados</a></li>
                         </ul>
                     </li>
 
@@ -69,8 +62,7 @@
                         </button>
                         <ul id="menuMembresias" class="hidden bg-orange-500">
                             <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Nueva Membresia</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Modificar Membresia</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Eliminar Membresia</a></li>
+                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Consultar Membresias Actuales</a></li>
                         </ul>
                     </li>
 
@@ -89,10 +81,25 @@
 
         <!-- Contenido principal -->
         <div class="flex-1 p-6">
-            <h1 class="text-3xl font-bold text-gray-800">Bienvenido al panel</h1>
-            <p class="mt-4 text-gray-600">Aquí puedes gestionar tu cuenta y acceder a todas las funcionalidades del sistema.</p>
+            <h1 class="text-4xl font-extrabold text-gray-800 text-center mb-4">
+                @yield('title', 'Bienvenido al Panel')
+            </h1>
+            
+            <p class="mt-4 text-lg text-gray-600 text-center">
+                @yield('description', 'Aquí puedes gestionar tu cuenta y acceder a todas las funcionalidades del sistema.')
+            </p>
+            
+            <div class="mt-6 bg-gray-100 p-4 rounded-lg shadow-md r">
+                <h2 class="text-2xl font-semibold text-gray-700">USUARIO ACTUAL</h2>
+                <p class="text-xl text-gray-900 mt-2">
+                    {{ Auth::user()->role->name }} - {{ Auth::user()->name }}
+                </p>
+            </div>
+            
             @yield('content')
+            
         </div>
+
         
     </div>
 
