@@ -6,14 +6,13 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('welcome');
 
-Route::get('/Adminindex', function () {
-    return view('admin.index');
-});
+Route::get('/admin/{section}',[AuthController::class, 'Admin'])->name('admin.section');
+//Route::get('/admin/{section}', [AdminController::class, 'handleAdminSection'])->name('admin.section');
+
 
 Route::get('/Empleadoindex', function () {
     return view('empleado.index');
@@ -21,6 +20,6 @@ Route::get('/Empleadoindex', function () {
 
 
 //prueba para inicio de sesion
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('formlogin');
+Route::get('/login', [AuthController::class, 'login'])->name('formlogin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

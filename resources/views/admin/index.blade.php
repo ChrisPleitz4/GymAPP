@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
 
 @section('content')
-        <h1>Pagina de inicio prueba de blade</h1>
+        <h1 style="text-align: center">Bienvenido {{$userName}}</h1>
 @endsection

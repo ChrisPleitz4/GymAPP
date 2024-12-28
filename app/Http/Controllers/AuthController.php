@@ -45,7 +45,7 @@ class AuthController extends Controller
             $roleId = $user->role->id;
             switch ($roleId) {
                 case 1:
-                    return view('admin.index');
+                    return view('admin.index',['userName' => $user->name]);
                     break;
                 case 2:
                     return view('empleado.index');
@@ -56,8 +56,8 @@ class AuthController extends Controller
             }
         }
 
-        // Si las credenciales no son correctas, redirigir con un error
-        return view('welcome');
+         // Si las credenciales no son correctas, redirigir con un error
+    return redirect()->route('welcome')->with('error', 'Credenciales incorrectas.')->withInput();;
     }
 
     /**
@@ -68,6 +68,26 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('welcome');
+    }
+
+    /**
+     * Validar Acceso a Rutas del Admin.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Admin($ruta)
+    {
+         // Verificar si el usuario está autenticado
+    if (!Auth::check() ) {
+        // Si no está autenticado, redirigir al login con un mensaje
+        return redirect()->route('welcome')->with('error', 'Debes iniciar sesión para acceder a esta página.');
+    }
+
+    // Si está autenticado, puedes acceder a los datos del usuario
+    $user = Auth::user();
+    
+    // Aquí puedes devolver la vista
+    return view('admin.index',['userName' => $user->name]);
     }
 }

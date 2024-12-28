@@ -42,11 +42,13 @@
 
                     <!-- Cerrar sesión -->
                     <li>
-                        <a href="#" class="flex items-center py-3 px-4 hover:bg-orange-500">
-                            <!-- Cambia el ícono de cerrar sesión -->
-                            <img src="{{ asset('images/cerrar-sesion.png') }}" alt="Cerrar sesión" class="h-12 w-12">
-                            <span class="ml-3">Cerrar sesión</span>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST" class="flex items-center py-3 px-4 hover:bg-orange-500">
+                            @csrf
+                            <button type="submit" class="flex items-center w-full text-left">
+                                <img src="{{ asset('images/cerrar-sesion.png') }}" alt="Cerrar sesión" class="h-12 w-12">
+                                <span class="ml-3">Cerrar sesión</span>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </nav>
