@@ -10,8 +10,8 @@
 <body class="bg-gray-100">
 
     <div class="flex h-screen">
-        <!-- Barra lateral -->
-        <div class="w-64 bg-orange-600 text-white flex-shrink-0">
+        <!-- Barra lateral fija -->
+        <div class="w-64 bg-orange-600 text-white flex-shrink-0 fixed top-0 left-0 h-full z-10">
             <div class="flex items-center justify-center h-24 bg-black">
                 <img src="{{ asset('images/logomenu.png') }}" alt="Logo" class="h-24">
             </div>
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Contenido principal -->
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 ml-64"> <!-- Espacio suficiente para evitar que se superponga al menú fijo -->
             <h1 class="text-4xl font-extrabold text-gray-800 text-center mb-4">
                 @yield('title', 'Bienvenido al Panel')
             </h1>

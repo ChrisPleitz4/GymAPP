@@ -37,6 +37,10 @@
                             <a href="#" class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors duration-200">
                                 Renovar
                             </a>
+                            <a href="{{route('clientes.show',[$client])}}" class="px-3 py-1 text-sm font-medium text-white bg-cyan-500 rounded-md hover:bg-cyan-600 transition-colors duration-200">
+                                Ver
+                            </a>
+                            
                         </td>
                     </tr>
                 @endforeach

@@ -6,13 +6,12 @@
     <title>Administrador Gym Pleitez</title>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
-    
 </head>
 <body class="bg-gray-100">
 
-    <div class="flex h-screen">
-        <!-- Barra lateral -->
-        <div class="w-64 bg-orange-600 text-white flex-shrink-0">
+    <div class="flex min-h-screen">
+        <!-- Barra lateral fija -->
+        <div class="w-64 bg-orange-600 text-white flex-shrink-0 overflow-y-auto fixed top-0 left-0 h-full z-10">
             <div class="flex items-center justify-center h-24 bg-black">
                 <img src="{{ asset('images/logomenu.png') }}" alt="Logo" class="h-24">
             </div>
@@ -20,7 +19,6 @@
                 <ul>
                     <li>
                         <a href="{{route('clientes.index')}}" class="flex items-center py-3 px-4 hover:bg-orange-500">
-                            <!-- Cambia el ícono de membresia -->
                             <img src="{{ asset('images/membresia.png') }}" alt="membresia" class="h-12 w-12">
                             <span class="ml-3">Consultar/Renovar Membresia</span>
                         </a>
@@ -28,16 +26,13 @@
                     
                     <li>
                         <a href="{{route('clientes.create')}}" class="flex items-center py-3 px-4 hover:bg-orange-500">
-                            <!-- Cambia el ícono de membresia -->
                             <img src="{{ asset('images/gestionarAtleta.png') }}" alt="membresia" class="h-12 w-12">
                             <span class="ml-3">Nuevo Atleta</span>
                         </a>
                     </li>
 
-                    <!-- Otra opción con submenú -->
                     <li class="relative group">
                         <button onclick="toggleMenu('menuEmpleado')" class="w-full flex items-center py-3 px-4 hover:bg-orange-500 focus:outline-none">
-                            <!-- Cambia este ícono también -->
                             <img src="{{ asset('images/empleado.png') }}" alt="Empleado" class="h-12 w-12">
                             <span class="ml-3">Gestionar Empleados</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,10 +45,8 @@
                         </ul>
                     </li>
 
-                     <!-- Otra opción con submenú -->
-                     <li class="relative group">
+                    <li class="relative group">
                         <button onclick="toggleMenu('menuMembresias')" class="w-full flex items-center py-3 px-4 hover:bg-orange-500 focus:outline-none">
-                            <!-- Cambia este ícono también -->
                             <img src="{{ asset('images/personalizarMembresia.png') }}" alt="Membresias" class="h-12 w-12">
                             <span class="ml-3">Personalizar Membresías</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +73,7 @@
         </div>
 
         <!-- Contenido principal -->
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 ml-64"> <!-- Asegura que el contenido no se superponga al menú -->
             <h1 class="text-4xl font-extrabold text-gray-800 text-center mb-4">
                 @yield('title', 'Bienvenido al Panel')
             </h1>
@@ -99,8 +92,6 @@
             @yield('content')
             
         </div>
-
-        
     </div>
 
     <!-- JavaScript para manejar el despliegue de submenús -->

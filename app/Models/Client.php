@@ -20,8 +20,9 @@ class Client extends Model
 
     //recuperar la ultima membresia de un cliente
     public function lastClientMembership()
-    {
-        return $this->memberships()->orderBy('start_date', 'desc')->first();
+    {       if($this->memberships() !=null){
+        return $this->memberships()->orderBy('start_date', 'desc')->first();}
+        return 'No posee membresias';
     }
 
     //recuperar si la membresia esta activa o no
