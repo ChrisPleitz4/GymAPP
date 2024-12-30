@@ -93,7 +93,9 @@
             
         </div>
     </div>
-
+    <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">
+        Regresar
+    </a>
     <!-- JavaScript para manejar el despliegue de submenús -->
     <script>
         function toggleMenu(menuId) {

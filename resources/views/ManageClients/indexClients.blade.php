@@ -34,7 +34,7 @@
                             <a href="{{ route('clientes.edit', [$client]) }}" class="px-3 py-1 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 transition-colors duration-200">
                                 Modificar
                             </a>
-                            <a href="#" class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <a href="{{route('nuevaMembresia.create',['id' => $client->id])}}" class="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors duration-200">
                                 Renovar
                             </a>
                             <a href="{{route('clientes.show',[$client])}}" class="px-3 py-1 text-sm font-medium text-white bg-cyan-500 rounded-md hover:bg-cyan-600 transition-colors duration-200">
@@ -46,6 +46,10 @@
                 @endforeach
             </tbody>
         </table>
+       
+    </div>
+    <div class="mt-4">
+        {{ $clients->links() }}
     </div>
     
     

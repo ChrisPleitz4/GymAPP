@@ -12,7 +12,7 @@ class ClientController extends Controller
     //metodo index para mostrar los clientes
     public function index()
     {
-        $Clients = Client::orderBy('id', 'asc')->paginate(10);
+        $Clients = Client::orderBy('id', 'asc')->paginate(5);
         return view('ManageClients.indexClients', ['user' => Auth::user(), 'clients' => $Clients]);
     }
 
@@ -29,7 +29,8 @@ class ClientController extends Controller
             'name' => $request->name,
             'PhoneNumber' => $request->PhoneNumber,
         ]);
-       return redirect()->route('clientes.show', $client)->with('success', 'Atleta creado correctamente');
+        $membresias = Membership::all();
+        return view('Clients_Membership.createClientMembership', ['membresias' => $membresias , 'client' => $client])->with('success', 'Cliente registrado correctamente');
     }
 
     //metod edit y update para editar un cliente
