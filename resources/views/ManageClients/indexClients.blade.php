@@ -3,7 +3,16 @@
 @section('title','Consulta y renovacion de Membresias') 
 @section('description','Aqui podras consultar membresias de clientes y crear o renovar membresias') 
 @section('content')
-   
+   {{-- Buscador --}}
+   <div class="mb-4">
+    <form action="{{ route('busqueda') }}" method="GET" class="flex gap-2">
+        <input type="text" name="search" placeholder="Buscar por ID o Nombre" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500 w-full sm:w-64" value="{{ request('search') }}">
+        <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none">
+            Buscar
+        </button>
+    </form>
+</div>
+
     <div class="overflow-x-auto shadow-md rounded-lg font-sans">
         <table class="min-w-full table-auto">
             <thead class="bg-orange-600 text-white">

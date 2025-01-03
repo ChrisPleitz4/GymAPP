@@ -40,8 +40,8 @@
                             </svg>
                         </button>
                         <ul id="menuEmpleado" class="hidden bg-orange-500">
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Nuevo Empleado</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Consultar Empleados</a></li>
+                            <li><a href="{{route('empleados.create')}}" class="block px-6 py-2 hover:bg-orange-400">Nuevo Empleado</a></li>
+                            <li><a href="{{route('empleados.index')}}" class="block px-6 py-2 hover:bg-orange-400">Consultar Empleados</a></li>
                         </ul>
                     </li>
 
@@ -90,12 +90,12 @@
             </div>
             
             @yield('content')
-            
+            <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">
+                Regresar
+            </a>
         </div>
     </div>
-    <a href="{{ url()->previous() }}" class="inline-block px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">
-        Regresar
-    </a>
+   
     <!-- JavaScript para manejar el despliegue de submenús -->
     <script>
         function toggleMenu(menuId) {

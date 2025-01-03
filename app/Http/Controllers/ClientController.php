@@ -59,6 +59,20 @@ class ClientController extends Controller
             'memberships' => $memberships,
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+    
+        // Filtramos los clientes por ID o nombre
+        $clients = Client::when($search, function($query, $search) {
+            return $query->where('id', 'like', "%{$search}%")
+                         ->orWhere('name', 'like', "%{$search}%");
+        })->paginate(5);
+    
+        // Regresamos la vista con los resultados de la búsqueda
+        return view('ManageClients.indexClients', compact('clients'));
+    }
     
     
 }

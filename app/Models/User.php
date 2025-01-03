@@ -28,6 +28,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    //recuperar el nombre del rol del usuario   
+    public function nameRole(){
+        return $this->role->name;
+    }
+    
+    //recuperar el dia de creacion del usuario
+    public function diaRegistro(){
+        $fecha = $this->created_at;
+        return $fecha->format('d-m-Y');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

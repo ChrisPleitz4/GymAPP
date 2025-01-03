@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientMembershipController;
+use App\Http\Controllers\EmployeeController;
 use Carbon\Carbon;
 
 //Ruta inicio de sesion
@@ -37,3 +38,8 @@ Route::get('Clientes-Memebresia/{id}/create', [ClientMembershipController::class
 Route::post('Clientes-Memebresia', [ClientMembershipController::class, 'store'])
     ->name('nuevaMembresia.store');
 
+//ruta para busqueda de clientes
+Route::get('busqueda', [ClientController::class, 'search'])->name('busqueda');
+
+//ruta para la creacion de nuevos empleados
+Route::resource('empleados', EmployeeController::class)->names('empleados')->names('empleados');
