@@ -31,10 +31,27 @@
                     <input type="email" id="email" name="email" value="{{old('email')}}" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-4 relative">
                     <label for="password" class="block text-gray-600">Contraseña</label>
-                    <input type="password" id="password" name="password" value="{{old('password')}}" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        value="{{old('password')}}" 
+                        class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                        required 
+                    />
+                    <button 
+                        type="button" 
+                        onclick="togglePassword('password', this)" 
+                        class="absolute inset-y-0 right-3 flex items-center"
+                    >
+                        <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" alt="Ver" class="w-5 h-5" id="password-icon" />
+                    </button>
                 </div>
+
+              
+                
 
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -71,3 +88,20 @@
    
 </body>
 </html>
+{{-- Hacer visible la constraseñá --}}
+<script>
+    function togglePassword(inputId, button) {
+        const input = document.getElementById(inputId);
+        const icon = button.querySelector('img');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.src = 'https://cdn-icons-png.flaticon.com/512/709/709611.png'; // Ícono de ojo abierto
+            icon.alt = 'Ocultar';
+        } else {
+            input.type = 'password';
+            icon.src = 'https://cdn-icons-png.flaticon.com/512/709/709612.png'; // Ícono de ojo cerrado
+            icon.alt = 'Ver';
+        }
+    }
+</script>
