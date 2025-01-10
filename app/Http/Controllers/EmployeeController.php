@@ -60,9 +60,9 @@ class EmployeeController extends Controller
     }
 
     
-    public function show($id)
+    public function show(User $Empleado)
     {
-        return view('empleados.show');
+        return view('ManageEmployees.showEmployee',['user' => Auth::user(), 'empleado' => $Empleado]);
     }
 
     
@@ -73,10 +73,55 @@ class EmployeeController extends Controller
     }
 
     
-    public function update(Request $request, $id)
-    {
-        $empleado =User::find($id);
-        
+    public function update(Request $request,  User $Empleado)
+    {   $name = $request->name;
+        $role_type = $request->input('role_type');
+        //verificar que se haya seleccionado un rol
+        if(!$role_type){
+            return redirect()->back()->withErrors(['role_type' => 'Debe seleccionar un rol para el empleado.'])
+            ->withInput();;
+        }
+
+        //verificar si el email nuevo  ya pertenece a otro usuario 
+        $email =$request->email;
+
+        $exists = User::where('email', $email)
+        ->where('id', '!=', $Empleado->id) // Excluyendo el usuario actual
+        ->exists();
+
+        if($exists){
+            return redirect()->back()->withErrors(['email' => 'Este email ya esta asociado a un usuario '])
+            ->withInput();;
+        }
+
+        //verificar si se desea modificar las contraseñás
+        $newPassword=$request->password;
+        $confirmNewPassword=$request->Cpassword;
+        //vacios entonces no se modifica contraseñá
+        if(empty($newPassword) && empty($confirmNewPassword)){
+            $Empleado->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role_id' => $role_type,]);
+            $Empleado->save();
+            
+        }else{// si no estan vacios entonces la contraseña se desea cambiar 
+                //comprobar si la constraseña y la confirmacion son iguales 
+            if($newPassword == $confirmNewPassword){
+                $Empleado->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password'=> bcrypt($newPassword),
+                    'role_id' => $role_type,]);
+                $Empleado->save();
+            }else{
+            return redirect()->back()->withErrors(['password' => 'Las contraseñas no coinciden...'])
+            ->withInput();;
+            }
+        }
+        session()->flash('success', 'Empleado actualizado correctamente.');
+        return view('ManageEmployees.showEmployee', ['user' => Auth::user(), 'empleado' => $Empleado]);
+
     }
 
     

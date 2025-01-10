@@ -7,7 +7,7 @@
         {{-- Formulario para agregar un nuevo empleado --}}
 
         <div class="bg-gray-100 flex justify-center py-12">
-                <form action="{{route('empleados.update')}}" method="POST" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 w-full max-w-md border-t-4 border-orange-500">
+                <form action="{{route('empleados.update', $empleado) }}" method="POST" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 w-full max-w-md border-t-4 border-orange-500">
                  @csrf
                  @method('PUT')
                   <h2 class="text-2xl font-bold text-center text-black mb-6">Modificar Empleado</h2>
@@ -20,6 +20,9 @@
                       class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                       required
                     />
+                    @error('name')
+                    <p class="text-red-500 text-sm mt-2">{!! $message !!}</p>
+                    @enderror
                   </div>
                   <!-- Seleccionar rol (ComboBox) -->
                   <div class="mb-4">
@@ -46,7 +49,7 @@
                     <input
                       type="text"
                       name="email"
-                      value="{{$empleado->email}}"	
+                      value="{{ old('email', $empleado->email) }}"	
                       placeholder="Ingresa el correo del cliente"
                       class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                       required
@@ -130,4 +133,7 @@
                   </div>
                 </form>
               </div>
+
+              
+            
 @endsection
