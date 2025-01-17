@@ -56,7 +56,7 @@ class EmployeeController extends Controller
             'password' => bcrypt($request->password),
             'role_id' => $role_type,]); 
 
-            return $user;
+            return redirect()->route('empleados.index')->with('success', '¡El empleado ha sido creado con éxito!');
     }
 
     
@@ -127,6 +127,9 @@ class EmployeeController extends Controller
     
     public function destroy($id)
     {
-        //
+        //buscar el empleado 
+        $Empleado= User::find($id);
+        $Empleado->delete();
+        return redirect()->route('empleados.index')->with('success', '¡El empleado ha sido eliminado con éxito!');
     }
 }

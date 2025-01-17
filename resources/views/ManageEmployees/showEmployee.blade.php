@@ -4,26 +4,25 @@
 @section('description','Consulta de Empleado') 
 @section('content')
 
-        
+      
+@if(session('success'))
+<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+    <strong class="font-bold">¡Éxito!</strong>
+    <span class="block sm:inline">{{ session('success') }}</span>
+    <button 
+        type="button" 
+        class="absolute top-0 bottom-0 right-0 px-4 py-3"
+        onclick="this.parentElement.style.display='none';">
+        <svg class="fill-current h-6 w-6 text-green-700" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Cerrar</title>
+            <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414l2.934 2.934-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414l-2.934-2.934 2.934-2.934a1 1 0 000-1.414z"/>
+        </svg>
+    </button>
+</div>
+@endif
       
         <div class="max-w-2xl mx-auto mt-8 p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md">
-                @if (session('success'))
-                <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-                    <div class="flex items-center p-3 bg-green-100 border border-green-400 text-green-700 rounded shadow">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-4a1 1 0 11-2 0v-4a1 1 0 112 0v4zm-1-7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                        </svg>
-                        <div class="flex-grow">
-                            <p class="text-sm font-medium">{{ session('success') }}</p>
-                        </div>
-                        <button onclick="document.getElementById('successMessage').remove();" class="text-green-600 hover:text-green-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            @endif
+
             
 
          <!-- Información del Empleado -->
