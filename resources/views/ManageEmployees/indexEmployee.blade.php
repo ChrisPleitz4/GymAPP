@@ -60,7 +60,7 @@
 </div>
 
 {{-- Modal de Confirmación --}}
-<div id="confirmModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
+<div id="confirmModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 justify-center items-center hidden">
     <div class="bg-white p-6 rounded shadow-md w-1/3">
         <h2 class="text-xl font-bold text-gray-700">¿Estás seguro?</h2>
         <p class="text-gray-600 mt-2">Esta acción eliminará al empleado. ¿Deseas continuar?</p>

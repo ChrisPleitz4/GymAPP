@@ -21,15 +21,6 @@ Route::resource('clients', ClientController::class)->names('clientes');
 Route::post('/welcome', [AuthController::class, 'login'])->name('formlogin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/prueba',function(){
-    $user = Client::find(1);
-        $user->memberships()->attach(1, [
-            'start_date' => now(),  // o la fecha que desees
-            'end_date' => now()->addDays(15)  // o la fecha que desees
-        ]);
-
-    return "membresia creada";
-} );
 
 //rutas para la creacion de nuevas membresias 
 Route::get('Clientes-Memebresia/{id}/create', [ClientMembershipController::class, 'create'])
@@ -43,3 +34,6 @@ Route::get('busqueda', [ClientController::class, 'search'])->name('busqueda');
 
 //ruta para la creacion de nuevos empleados
 Route::resource('empleados', EmployeeController::class)->names('empleados')->names('empleados');
+
+//ruta para la creacion de nuevas membresias
+Route::resource('membresias', MembershipController::class)->names('membresias');

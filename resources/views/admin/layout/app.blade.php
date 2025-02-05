@@ -54,8 +54,8 @@
                             </svg>
                         </button>
                         <ul id="menuMembresias" class="hidden bg-orange-500">
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Nueva Membresia</a></li>
-                            <li><a href="#" class="block px-6 py-2 hover:bg-orange-400">Consultar Membresias Actuales</a></li>
+                            <li><a href="{{route('membresias.create')}}" class="block px-6 py-2 hover:bg-orange-400">Nueva Membresia</a></li>
+                            <li><a href="{{route('membresias.index')}}" class="block px-6 py-2 hover:bg-orange-400">Consultar Membresias Actuales</a></li>
                         </ul>
                     </li>
 
